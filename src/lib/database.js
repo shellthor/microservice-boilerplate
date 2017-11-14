@@ -1,3 +1,3 @@
-import sequelize from './sequelize'
+import mongoose from './mongoose'
 
-export default sequelize
+export default mongoose

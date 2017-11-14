@@ -63,8 +63,11 @@ server.get('/version', version.get)
 server.get('/ping', ping.get)
 server.get('/echo/:name', echo.get)
 server.post('/echo', echo.post)
-server.get('/api', api.get)
-server.post('/api/:batch', api.post)
+server.get('/api', api.list)
+server.get('/api/:id', api.get)
+server.post('/api', api.post)
+server.put('/api/:id', api.update)
+server.del('/api/:id', api.remove)
 server.get('/throw', api.error)
 
 server.on(

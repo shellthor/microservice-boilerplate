@@ -1,25 +1,51 @@
 import dotenv from 'dotenv/config' // eslint-disable-line no-unused-vars
+import Joi from 'joi'
+
+const envVarsSchema = Joi.object({
+  NODE_ENV: Joi.string()
+    .allow(['development', 'production', 'test', 'provision'])
+    .default('development'),
+  SERVER_PORT: Joi.number().default(4040),
+  MONGOOSE_DEBUG: Joi.boolean().when('NODE_ENV', {
+    is: Joi.string().equal('development'),
+    then: Joi.boolean().default(true),
+    otherwise: Joi.boolean().default(false),
+  }),
+  JWT_SECRET: Joi.string()
+    .required()
+    .description('JWT Secret required to sign'),
+  MONGO_HOST: Joi.string()
+    .required()
+    .description('Mongo DB host url'),
+  MONGO_PORT: Joi.number().default(27017),
+  LOG_LEVEL: Joi.string()
+    .allow(['FATAL', 'ERROR', 'WARN', 'INFO', 'DEBUG', 'TRACE'])
+    .when('NODE_ENV', {
+      is: Joi.string().equal('production'),
+      then: Joi.string().default('INFO'),
+      otherwise: Joi.string().default('DEBUG'),
+    }),
+  SENTRY_DSN: Joi.string(),
+})
+  .unknown()
+  .required()
+
+const {error, value: envVars} = Joi.validate(process.env, envVarsSchema)
+if (error) {
+  throw new Error(`Config validation error: ${error.message}`)
+}
 
 const config = {
-  env: process.env.NODE_ENV,
-  port: Number(process.env.PORT),
-  baseUrl: process.env.BASE_URL,
+  env: envVars.NODE_ENV,
+  port: envVars.SERVER_PORT,
+  mongooseDebug: envVars.MONGOOSE_DEBUG,
   logLevel: process.env.LOG_LEVEL,
-  throttle: process.env.THROTTLE === 'true',
-  database: {
-    postgres: {
-      username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      connectionString: process.env.POSTGRES_CONNECTION,
-      database: process.env.POSTGRES_DATABASE,
-      pool: {
-        max: Number(process.env.POSTGRES_POOL_MAX),
-        min: Number(process.env.POSTGRES_POOL_MIN),
-        idle: Number(process.env.POSTGRES_POOL_IDLE),
-      },
-    },
-  },
   sentryDSN: process.env.SENTRY_DSN,
+  jwtSecret: envVars.JWT_SECRET,
+  mongo: {
+    host: envVars.MONGO_HOST,
+    port: envVars.MONGO_PORT,
+  },
 }
 
 export default config

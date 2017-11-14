@@ -1,5 +1,6 @@
-import logger from './lib/logger'
 import Config from './lib/config'
+import logger from './lib/logger'
+import database from './lib/database'
 import server from './server'
 
 const app = server
@@ -27,6 +28,7 @@ process.on('exit', async () => {
 
 const startServer = async () => {
   try {
+    await database.connect()
     await app.listen(Config.port)
     logger.info(`Server is listening on port ${Config.port}`)
   } catch (err) {
