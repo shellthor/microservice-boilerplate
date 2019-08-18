@@ -54,7 +54,7 @@
     "bunyan": "1.8.12",
     "bunyan-sentry-stream": "1.2.1",
     "cross-env": "5.2.0",
-    "dotenv": "6.0.0",
+    "dotenv": "8.1.0",
     "helmet": "3.13.0",
     "joi": "13.7.0",
     "jsonwebtoken": "8.3.0",
