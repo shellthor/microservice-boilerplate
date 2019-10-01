@@ -53,7 +53,7 @@
     "bluebird": "3.5.3",
     "bunyan": "1.8.12",
     "bunyan-sentry-stream": "1.2.1",
-    "cross-env": "5.2.0",
+    "cross-env": "6.0.1",
     "dotenv": "6.0.0",
     "helmet": "3.13.0",
     "joi": "13.7.0",
