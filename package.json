@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "axios": "0.18.0",
-    "bluebird": "3.5.3",
+    "bluebird": "3.7.0",
     "bunyan": "1.8.12",
     "bunyan-sentry-stream": "1.2.1",
     "cross-env": "5.2.0",
