@@ -60,7 +60,7 @@
     "jsonwebtoken": "8.3.0",
     "knex": "0.15.2",
     "lodash": "4.17.11",
-    "mock-knex": "0.4.2",
+    "mock-knex": "0.4.7",
     "mongoose": "5.3.11",
     "oracledb": "3.0.0",
     "passport": "0.4.0",
