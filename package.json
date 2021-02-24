@@ -58,7 +58,7 @@
     "joi": "17.3.0",
     "jsonwebtoken": "8.5.1",
     "knex": "0.21.12",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "mock-knex": "0.4.9",
     "mongoose": "5.11.3",
     "oracledb": "5.0.0",
